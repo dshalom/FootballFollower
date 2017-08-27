@@ -12,6 +12,9 @@ class LeagueSelectionActivity : AppCompatActivity() {
 
     @Inject lateinit var pokemonService: PokemonService
 
+ //   @Inject lateinit var toolbox: Toolbox
+    @Inject lateinit var spanner: Spanner
+
     val component by lazy { app.component.plus(LeagueSelectionModule(this)) }
 
     val Activity.app: App
@@ -28,5 +31,8 @@ class LeagueSelectionActivity : AppCompatActivity() {
             Log.e("dsds", "its not null")
 
         }
+
+     //   toolbox.doit()
+        spanner.doit()
     }
 }

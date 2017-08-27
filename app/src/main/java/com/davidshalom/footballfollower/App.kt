@@ -7,14 +7,17 @@ import com.davidshalom.footballfollower.di.modules.AppModule
 
 class App : Application() {
 
+    companion object {
+        @JvmStatic lateinit var instance: App
+    }
     val component: AppComponent by lazy {
         DaggerAppComponent
                 .builder()
-                .appModule(AppModule(this))
                 .build()
     }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
     }
 }

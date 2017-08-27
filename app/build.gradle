@@ -6,6 +6,10 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
+
+    def API_URL = 'API_URL'
+    def STRING = 'String'
+
     defaultConfig {
         applicationId "com.davidshalom.footballfollower"
         minSdkVersion 23
@@ -13,6 +17,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField STRING, API_URL, '"http://pokeapi.co/"'
+
     }
     buildTypes {
         release {
@@ -38,5 +44,16 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.11'
     compile 'com.google.dagger:dagger:2.11'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    compile 'com.jakewharton.timber:timber:4.5.1'
+
 
 }

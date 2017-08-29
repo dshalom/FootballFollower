@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.davidshalom.footballfollower.di.modules.LeagueSelectionModule
-import xyz.ivankocijan.kotlinexample.PokemonService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import com.davidshalom.footballfollower.model.services.FootballService
 import javax.inject.Inject
 
 class LeagueSelectionActivity : AppCompatActivity() {
-
-    @Inject lateinit var pokemonService: PokemonService
-
- //   @Inject lateinit var toolbox: Toolbox
+    @Inject lateinit var footballService: FootballService
     @Inject lateinit var spanner: Spanner
 
     val component by lazy { app.component.plus(LeagueSelectionModule(this)) }
@@ -25,14 +24,14 @@ class LeagueSelectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_league_selection)
         component.inject(this)
 
-        if (pokemonService == null) {
-            Log.e("dsds", "its null")
-        } else {
-            Log.e("dsds", "its not null")
+        footballService.getCompetitions()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { competitions -> Log.e("dsds", competitions.get(0).caption) },
+                        { error -> Log.e("dsds", error.message) }
+                )
 
-        }
-
-     //   toolbox.doit()
         spanner.doit()
     }
 }

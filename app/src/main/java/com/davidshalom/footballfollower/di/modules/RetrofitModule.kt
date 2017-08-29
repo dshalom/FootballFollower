@@ -1,27 +1,24 @@
-package xyz.ivankocijan.kotlinexample.dagger.setup.module
+package com.davidshalom.footballfollower.di.modules
 
+import com.davidshalom.footballfollower.model.services.FootballService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import xyz.ivankocijan.kotlinexample.PokemonService
 import javax.inject.Singleton
 
-/**
- * @author Koc
- *         ivan.kocijan@infinum.hr
- * @since 20/03/16
- */
 @Module
 class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(httpClient: OkHttpClient, baseUrl: String, converter: Converter.Factory): Retrofit {
+    fun provideRetrofit(httpClient: OkHttpClient, baseUrl: String, converter: Converter.Factory, callAdapter: CallAdapter.Factory ): Retrofit {
 
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .addCallAdapterFactory(callAdapter)
                 .addConverterFactory(converter)
                 .client(httpClient).build()
 
@@ -29,8 +26,8 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideService(retrofit: Retrofit): PokemonService {
-        return retrofit.create(PokemonService::class.java)
+    fun provideService(retrofit: Retrofit): FootballService {
+        return retrofit.create(FootballService::class.java)
     }
 
 }

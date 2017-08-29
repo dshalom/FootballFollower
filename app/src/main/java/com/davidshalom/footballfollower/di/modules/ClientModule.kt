@@ -1,4 +1,4 @@
-package xyz.ivankocijan.kotlinexample.dagger.setup.module
+package com.davidshalom.footballfollower.di.modules
 
 import com.davidshalom.footballfollower.BuildConfig
 import dagger.Module
@@ -8,11 +8,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-/**
- * @author Koc
- *         ivan.kocijan@infinum.hr
- * @since 20/03/16
- */
 @Module
 class ClientModule {
 

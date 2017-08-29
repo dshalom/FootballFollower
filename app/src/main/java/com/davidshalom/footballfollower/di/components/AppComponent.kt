@@ -1,9 +1,9 @@
 package com.davidshalom.footballfollower.di.components
 
-import com.davidshalom.footballfollower.LeagueSelectionActivity
-import com.davidshalom.footballfollower.di.modules.LeagueSelectionModule
+import com.davidshalom.footballfollower.di.modules.*
 import dagger.Component
-import xyz.ivankocijan.kotlinexample.dagger.setup.module.*
+import xyz.ivankocijan.kotlinexample.dagger.setup.module.HostModule
+import com.davidshalom.footballfollower.di.modules.RetrofitModule
 import javax.inject.Singleton
 
 @Singleton
@@ -11,6 +11,7 @@ import javax.inject.Singleton
         AppContextModule::class,
         RetrofitModule::class,
         ClientModule::class,
+        CallAdapterModule::class,
         GsonConverterModule::class,
         GsonModule::class,
         HostModule::class,

@@ -5,7 +5,6 @@ import com.davidshalom.footballfollower.Spanner
 import com.davidshalom.footballfollower.di.scopes.LeagueSelectionScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class LeagueSelectionModule(val activity: LeagueSelectionActivity) {
@@ -17,7 +16,7 @@ class LeagueSelectionModule(val activity: LeagueSelectionActivity) {
     @Provides
     @LeagueSelectionScope
     fun provideSpanner(): Spanner {
-        return Spanner();
+        return Spanner()
     }
 
 }

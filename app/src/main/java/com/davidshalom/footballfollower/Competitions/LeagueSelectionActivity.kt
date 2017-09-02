@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 
 class LeagueSelectionActivity : AppCompatActivity() {
-    @Inject lateinit var footballService: FootballService
     @Inject lateinit var spanner: Spanner
     lateinit var viewModel: CompetitionsViewModel
 
@@ -30,15 +29,6 @@ class LeagueSelectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league_selection)
         component.inject(this)
-
-        footballService.getCompetitions()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { competitions -> Log.e("dsds", competitions.get(0).caption) },
-                        { error -> Log.e("dsds", error.message) }
-                )
-
         spanner.doit()
 
         viewModel = ViewModelProviders.of(this, RepositoryFactory(app))

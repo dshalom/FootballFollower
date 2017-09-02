@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.davidshalom.footballfollower.Spanner
 import com.davidshalom.footballfollower.di.components.AppComponent
-import com.davidshalom.footballfollower.di.components.RepositoryComponent
 import javax.inject.Inject
 
 

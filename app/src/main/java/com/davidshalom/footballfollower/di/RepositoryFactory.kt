@@ -4,8 +4,6 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.davidshalom.footballfollower.App
 import com.davidshalom.footballfollower.di.components.AppComponent
-import com.davidshalom.footballfollower.di.components.RepositoryComponent
-
 
 class RepositoryFactory constructor(val application: App) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

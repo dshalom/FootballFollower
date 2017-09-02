@@ -1,6 +1,6 @@
 package com.davidshalom.footballfollower.di.modules
 
-import com.davidshalom.footballfollower.LeagueSelectionActivity
+import com.davidshalom.footballfollower.Competitions.LeagueSelectionActivity
 import com.davidshalom.footballfollower.Spanner
 import com.davidshalom.footballfollower.di.scopes.LeagueSelectionScope
 import dagger.Module

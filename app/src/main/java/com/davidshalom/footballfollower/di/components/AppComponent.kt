@@ -1,5 +1,6 @@
 package com.davidshalom.footballfollower.di.components
 
+import com.davidshalom.footballfollower.Competitions.CompetitionsViewModel
 import com.davidshalom.footballfollower.di.modules.AppContextModule
 import com.davidshalom.footballfollower.di.modules.RetrofitModule
 import com.davidshalom.footballfollower.di.modules.ClientModule
@@ -26,4 +27,10 @@ import javax.inject.Singleton
 
 interface AppComponent {
     fun plus(leagueSelectionModule: LeagueSelectionModule): LeagueSelectionComponent
+
+    fun inject(competitionsViewModel: CompetitionsViewModel)
+
+    interface Injectable {
+        fun inject(countdownComponent: AppComponent)
+    }
 }

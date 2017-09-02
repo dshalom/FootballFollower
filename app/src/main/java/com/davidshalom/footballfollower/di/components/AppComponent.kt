@@ -1,15 +1,7 @@
 package com.davidshalom.footballfollower.di.components
 
 import com.davidshalom.footballfollower.Competitions.CompetitionsViewModel
-import com.davidshalom.footballfollower.di.modules.AppContextModule
-import com.davidshalom.footballfollower.di.modules.RetrofitModule
-import com.davidshalom.footballfollower.di.modules.ClientModule
-import com.davidshalom.footballfollower.di.modules.CallAdapterModule
-import com.davidshalom.footballfollower.di.modules.GsonConverterModule
-import com.davidshalom.footballfollower.di.modules.GsonModule
-import com.davidshalom.footballfollower.di.modules.LoggerModule
-import com.davidshalom.footballfollower.di.modules.HostModule
-import com.davidshalom.footballfollower.di.modules.LeagueSelectionModule
+import com.davidshalom.footballfollower.di.modules.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,7 +14,8 @@ import javax.inject.Singleton
         GsonConverterModule::class,
         GsonModule::class,
         HostModule::class,
-        LoggerModule::class
+        LoggerModule::class,
+        RepositoryModule::class
 ))
 
 interface AppComponent {

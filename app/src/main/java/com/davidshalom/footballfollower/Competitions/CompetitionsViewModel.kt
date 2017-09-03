@@ -1,23 +1,32 @@
 package com.davidshalom.footballfollower.Competitions
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
-import com.davidshalom.footballfollower.Spanner
 import com.davidshalom.footballfollower.di.components.AppComponent
 import javax.inject.Inject
 
 
-class CompetitionsViewModel : ViewModel(), AppComponent.Injectable  {
+class CompetitionsViewModel : ViewModel(), AppComponent.Injectable {
 
+    lateinit var user: LiveData<ApiResponse>
     @Inject lateinit var competitionsRepository: CompetitionsRepository
 
     override fun inject(countdownComponent: AppComponent) {
         countdownComponent.inject(this)
     }
 
-    fun doit() {
-        Log.e("dsds", "doit");
-
-        competitionsRepository.doit()
+    fun init() {
+//        if (this.user != null) {
+//            // ViewModel is created per Fragment so
+//            // we know the userId won't change
+//            return
+//        }
+        user = competitionsRepository.getCompetitions()
     }
+
+    fun getCompetitions(): LiveData<ApiResponse> {
+        return user
+    }
+
+
 }

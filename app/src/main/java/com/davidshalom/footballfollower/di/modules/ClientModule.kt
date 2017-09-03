@@ -20,7 +20,7 @@ class ClientModule {
         okHttpClientBuilder.connectTimeout(networkTimeoutSecond, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
-            logger.level = HttpLoggingInterceptor.Level.BODY
+            logger.level = HttpLoggingInterceptor.Level.BASIC
             okHttpClientBuilder.addInterceptor(logger)
         }
 

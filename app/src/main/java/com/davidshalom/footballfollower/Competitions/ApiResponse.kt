@@ -1,19 +1,16 @@
 package com.davidshalom.footballfollower.Competitions
 
-import com.davidshalom.footballfollower.model.entities.Competition
-
-class ApiResponse {
-    var competitions: List<Competition>? = null
+class ApiResponse<T> {
+    var data: T? = null
     var error: Throwable? = null
 
-    constructor(competitions: List<Competition>?) {
-        this.competitions = competitions
+    fun onSuccess(competitions: T?) {
+        this.data = competitions
         this.error = null
     }
 
-    constructor(error: Throwable) {
+    fun onError(error: Throwable) {
         this.error = error
-        this.competitions = null
+        this.data = null
     }
-
 }

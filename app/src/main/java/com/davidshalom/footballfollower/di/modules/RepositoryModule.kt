@@ -4,7 +4,6 @@ import com.davidshalom.footballfollower.Competitions.CompetitionsRepository
 import com.davidshalom.footballfollower.model.services.FootballService
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module

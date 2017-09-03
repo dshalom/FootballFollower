@@ -30,10 +30,13 @@ class LeagueSelectionActivity : LifecycleActivity() {
 
         viewModel = ViewModelProviders.of(this, RepositoryFactory(app))
                 .get(CompetitionsViewModel::class.java)
-
-        viewModel.init()
         viewModel.getCompetitions().observe(this, Observer({ apiResponse ->
-            Log.e("dsds", apiResponse?.get(0)?.caption)
+            if (apiResponse?.error == null) {
+                Log.e("dsds", apiResponse?.data?.get(0)?.caption)
+            } else {
+                Log.e("dsds", "error")
+
+            }
         }))
 
     }

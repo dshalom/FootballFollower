@@ -33,7 +33,7 @@ class LeagueSelectionActivity : LifecycleActivity() {
 
         viewModel.init()
         viewModel.getCompetitions().observe(this, Observer({ apiResponse ->
-            Log.e("dsds", apiResponse.toString())
+            Log.e("dsds", apiResponse?.get(0)?.caption)
         }))
 
     }

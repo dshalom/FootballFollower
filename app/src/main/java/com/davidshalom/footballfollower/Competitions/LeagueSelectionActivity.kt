@@ -31,12 +31,6 @@ class LeagueSelectionActivity : LifecycleActivity() {
         component.inject(this)
         spanner.doit()
 
-        val db = Room.databaseBuilder(this,
-                AppDatabase::class.java, "people_db").allowMainThreadQueries().build()
-
-        var competition = Competition(8, "david")
-        db.competitionDao().insertAll(competition)
-
         viewModel = ViewModelProviders.of(this, RepositoryFactory(app))
                 .get(CompetitionsViewModel::class.java)
         viewModel.getCompetitions().observe(this, Observer({ apiResponse ->

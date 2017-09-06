@@ -1,5 +1,6 @@
 package com.davidshalom.footballfollower.di.modules
 
+import android.content.Context
 import com.davidshalom.footballfollower.Competitions.CompetitionsRepository
 import com.davidshalom.footballfollower.model.services.FootballService
 import dagger.Module
@@ -11,7 +12,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideCompetitionsRepository(footballService : FootballService): CompetitionsRepository {
-        return CompetitionsRepository(footballService)
+    fun provideCompetitionsRepository(context: Context, footballService: FootballService): CompetitionsRepository {
+        return CompetitionsRepository(context, footballService)
     }
 }

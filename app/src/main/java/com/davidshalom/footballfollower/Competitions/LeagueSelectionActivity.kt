@@ -4,20 +4,23 @@ import android.app.Activity
 import android.arch.lifecycle.LifecycleActivity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.room.Room
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
 import com.davidshalom.footballfollower.App
 import com.davidshalom.footballfollower.R
 import com.davidshalom.footballfollower.Spanner
+import com.davidshalom.footballfollower.db.entities.AppDatabase
+import com.davidshalom.footballfollower.db.entities.Competition
 import com.davidshalom.footballfollower.di.RepositoryFactory
 import com.davidshalom.footballfollower.di.modules.LeagueSelectionModule
 import javax.inject.Inject
 
 class LeagueSelectionActivity : LifecycleActivity() {
     @Inject lateinit var spanner: Spanner
-    lateinit var viewModel: CompetitionsViewModel
+    private lateinit var viewModel: CompetitionsViewModel
 
-    val component by lazy { app.component.plus(LeagueSelectionModule(this)) }
+    private val component by lazy { app.component.plus(LeagueSelectionModule(this)) }
 
     val Activity.app: App
         get() = application as App
@@ -28,15 +31,17 @@ class LeagueSelectionActivity : LifecycleActivity() {
         component.inject(this)
         spanner.doit()
 
+        val db = Room.databaseBuilder(this,
+                AppDatabase::class.java, "people_db").allowMainThreadQueries().build()
+
+        var competition = Competition(8, "david")
+        db.competitionDao().insertAll(competition)
+
         viewModel = ViewModelProviders.of(this, RepositoryFactory(app))
                 .get(CompetitionsViewModel::class.java)
         viewModel.getCompetitions().observe(this, Observer({ apiResponse ->
-            if (apiResponse?.error == null) {
-                Log.e("dsds", apiResponse?.data?.get(0)?.caption)
-            } else {
-                Log.e("dsds", "error")
+            findViewById<TextView>(R.id.txt).setText(apiResponse?.get(0)?.caption + "  " + (apiResponse?.size))
 
-            }
         }))
 
     }

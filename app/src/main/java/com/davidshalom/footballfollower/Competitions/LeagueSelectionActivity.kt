@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 class LeagueSelectionActivity : LifecycleActivity() {
     @Inject lateinit var spanner: Spanner
-    private lateinit var viewModel: CompetitionsViewModel
 
-    private val component by lazy { app.component.plus(LeagueSelectionModule(this)) }
+    private val component by lazy { app.component.plus(LeagueSelectionModule()) }
+    private lateinit var viewModel: CompetitionsViewModel
 
     val Activity.app: App
         get() = application as App
@@ -34,7 +34,7 @@ class LeagueSelectionActivity : LifecycleActivity() {
         viewModel.getCompetitions().observe(this, Observer({ apiResponse ->
 
             Log.e("dsds", "" + apiResponse?.status)
-            findViewById<TextView>(R.id.txt).setText(apiResponse?.data?.get(0)?.caption + "  " + (apiResponse?.data?.size))
+        //    findViewById<TextView>(R.id.txt).setText(apiResponse?.data?.get(0)?.caption + "  " + (apiResponse?.data?.size))
 
         }))
 

@@ -15,7 +15,8 @@ import javax.inject.Singleton
         GsonModule::class,
         HostModule::class,
         LoggerModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        DbModule::class
 ))
 
 interface AppComponent {

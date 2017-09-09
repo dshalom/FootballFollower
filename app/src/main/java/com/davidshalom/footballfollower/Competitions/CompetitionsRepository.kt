@@ -8,6 +8,7 @@ import android.util.Log
 import com.davidshalom.footballfollower.db.entities.AppDatabase
 import com.davidshalom.footballfollower.db.entities.Competition
 import com.davidshalom.footballfollower.model.services.FootballService
+import com.davidshalom.footballfollower.model.services.Resource
 import retrofit2.Call
 import retrofit2.Response
 
@@ -17,14 +18,24 @@ class CompetitionsRepository(context: Context, val footballService: FootballServ
     val db = Room.databaseBuilder(context,
             AppDatabase::class.java, "people_db").allowMainThreadQueries().build()
 
-    fun getCompetitions(): LiveData<List<Competition>> {
+    fun getCompetitions(): LiveData<Resource<List<Competition>>> {
+
+        val data = MutableLiveData<Resource<List<Competition>>>()
+        data.value = Resource.loading(db.competitionDao().all)
+
+        // data.setValue(Resource.sdb.competitionDao().all)
+
         val call = footballService.getCompetitions()
+
+        Log.e("dsds", "calling api")
+
         call.enqueue(object : retrofit2.Callback<List<Competition>> {
             override fun onResponse(call: Call<List<Competition>>?, response: Response<List<Competition>>) {
                 if (response.isSuccessful) {
 
-
-                    db.competitionDao().insertAll2(response.body())
+                    Log.e("dsds", "writing to db")
+                    db.competitionDao().insertAll(response.body())
+                    data.setValue(Resource.success(db.competitionDao().all))
 
                 } else {
                     //   val res = ApiResponse<List<Competition>>()
@@ -39,8 +50,9 @@ class CompetitionsRepository(context: Context, val footballService: FootballServ
                 // data.value = res
             }
         })
+        Log.e("dsds", "reding form db ")
 
-        return db.competitionDao().all
+        return data
     }
 }
 

@@ -1,4 +1,4 @@
-package com.davidshalom.footballfollower.db.entities
+package com.davidshalom.footballfollower.model.db.entities
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room

@@ -2,16 +2,15 @@ package com.davidshalom.footballfollower.Competitions
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import com.davidshalom.footballfollower.db.entities.Competition
 import com.davidshalom.footballfollower.di.components.AppComponent
-import com.davidshalom.footballfollower.di.modules.LeagueSelectionModule
+import com.davidshalom.footballfollower.model.FootballlRepository
+import com.davidshalom.footballfollower.model.db.entities.Competition
 import com.davidshalom.footballfollower.model.services.Resource
-
 import javax.inject.Inject
 
 class CompetitionsViewModel : ViewModel(), AppComponent.Injectable {
     var data: LiveData<Resource<List<Competition>>>? = null
-    @Inject lateinit var competitionsRepository: CompetitionsRepository
+    @Inject lateinit var competitionsRepository: FootballlRepository
 
     override fun inject(appComponent: AppComponent) {
         appComponent.inject(this)

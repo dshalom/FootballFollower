@@ -2,9 +2,8 @@ package com.davidshalom.footballfollower.di.modules
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.davidshalom.footballfollower.db.entities.AppDatabase
-import com.davidshalom.footballfollower.db.entities.CompetitionDao
-import com.davidshalom.footballfollower.di.scopes.LeagueSelectionScope
+import com.davidshalom.footballfollower.model.db.entities.AppDatabase
+import com.davidshalom.footballfollower.model.db.entities.CompetitionDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -25,6 +25,6 @@ interface AppComponent {
     fun inject(competitionsViewModel: CompetitionsViewModel)
 
     interface Injectable {
-        fun inject(countdownComponent: AppComponent)
+        fun inject(appComponent: AppComponent)
     }
 }

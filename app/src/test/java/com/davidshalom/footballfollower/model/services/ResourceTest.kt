@@ -12,7 +12,6 @@ class ResourceTest {
 
     }
 
-
     @Test
     fun onError() {
         val resource = Resource.error<String>("error")

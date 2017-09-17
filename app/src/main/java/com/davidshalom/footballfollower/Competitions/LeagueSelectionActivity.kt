@@ -6,7 +6,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import com.davidshalom.footballfollower.App
 import com.davidshalom.footballfollower.R
 import com.davidshalom.footballfollower.Spanner
@@ -34,7 +33,7 @@ class LeagueSelectionActivity : LifecycleActivity() {
         viewModel.getCompetitions().observe(this, Observer({ apiResponse ->
 
             Log.e("dsds", "" + apiResponse?.status)
-        //    findViewById<TextView>(R.id.txt).setText(apiResponse?.data?.get(0)?.caption + "  " + (apiResponse?.data?.size))
+            //    findViewById<TextView>(R.id.txt).setText(apiResponse?.data?.get(0)?.caption + "  " + (apiResponse?.data?.size))
 
         }))
 

@@ -16,7 +16,6 @@ class DbModule {
     fun providedDb(context: Context): AppDatabase =
             Room.databaseBuilder(context, AppDatabase::class.java, "people_db").allowMainThreadQueries().build()
 
-
     @Provides
     @Singleton
     fun provideCompetitionDao(appDatabase: AppDatabase): CompetitionDao {

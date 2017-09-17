@@ -10,7 +10,7 @@ import com.davidshalom.footballfollower.model.services.Resource
 import retrofit2.Call
 import retrofit2.Response
 
-class FootballlRepository(val context: Context, val footballService: FootballService, val competitionsDao: CompetitionDao) {
+class FootballRepository(val context: Context, val footballService: FootballService, val competitionsDao: CompetitionDao) {
 
     fun getCompetitions(): LiveData<Resource<List<Competition>>> {
 

@@ -7,45 +7,53 @@ import com.davidshalom.footballfollower.model.db.entities.Competition
 import com.davidshalom.footballfollower.model.db.entities.CompetitionDao
 import com.davidshalom.footballfollower.model.services.FootballService
 import com.davidshalom.footballfollower.model.services.Resource
-import retrofit2.Call
-import retrofit2.Response
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class FootballRepository(val context: Context, val footballService: FootballService, val competitionsDao: CompetitionDao) {
 
+    private lateinit var dbData: List<Competition>
+    private val data = MutableLiveData<Resource<List<Competition>>>()
+
     fun getCompetitions(): LiveData<Resource<List<Competition>>> {
 
-        val data = MutableLiveData<Resource<List<Competition>>>()
-        val dbCount = competitionsDao.count()
 
-        if (dbCount == 0) {
-            data.value = Resource.loading(competitionsDao.all)
-
-        } else {
-            data.value = Resource.success(competitionsDao.all)
+        doAsync {
+            // Do some work
+            dbData = competitionsDao.all
+            uiThread {
+                data.value = Resource.loading(dbData)
+            }
         }
 
-        val call = footballService.getCompetitions()
-        call.enqueue(object : retrofit2.Callback<List<Competition>> {
-            override fun onResponse(call: Call<List<Competition>>?, response: Response<List<Competition>>) {
+        doAsync {
+            try {
+                val response = footballService.getCompetitions().execute()
                 if (response.isSuccessful) {
                     competitionsDao.insertAll(response.body())
-                    data.setValue(Resource.success(competitionsDao.all))
-
-                } else {
-                    if (dbCount == 0) {
-                        data.setValue(Resource.error("empty response"))
+                    uiThread {
+                        data.setValue(Resource.success(response.body()))
                     }
+                } else {
+                    uiThread { handleError() }
+                }
+            } catch (e: Exception) {
+                uiThread {
+                    uiThread { handleError() }
                 }
             }
-
-            override fun onFailure(call: Call<List<Competition>>?, t: Throwable?) {
-                if (dbCount == 0) {
-                    data.value = Resource.error(t.toString())
-                }
-            }
-        })
-
+        }
         return data
     }
+
+    fun handleError() {
+        if (dbData.size == 0) {
+            data.setValue(Resource.error("empty response"))
+
+        } else {
+            data.setValue(Resource.success(dbData))
+        }
+    }
 }
+
 
